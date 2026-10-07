@@ -1,4 +1,6 @@
-﻿int i=4;
+﻿using System.Runtime.CompilerServices;
+
+int i=4;
 double d = i; // Implicit conversion from int to double
 // Console.WriteLine(d);
 double x = 78.7;
@@ -63,3 +65,24 @@ else
 //}
 
 
+
+
+// Try Parse  -- It tries to convert into an int if it's successful it returns true else false
+Console.Write("Enter your EmpCode: ");
+string empCodeInput = Console.ReadLine();
+
+if (int.TryParse(empCodeInput, out int empCode)) // in this out means that the value of empCode will be assigned if the parsing is successful
+{
+    if (empCode == 1234)
+    {
+        Console.WriteLine("You are a valid employee");
+    }
+    else
+    {
+        Console.WriteLine("You are not a valid employee");
+    }
+}
+else
+{
+    Console.WriteLine("Please Enter a Valid Input");
+}
