@@ -390,7 +390,7 @@ do
                 Console.Write("Enter the first number: ");
                 subnum1 = int.TryParse(Console.ReadLine(), out subnum1) ? subnum1 : 0;
                 Console.Write("Enter the second number: ");
-                subnum2 = int.TryParse(Console.ReadLine(), out subnum2) ? subnum1 : 0;
+                subnum2 = int.TryParse(Console.ReadLine(), out subnum2) ? subnum2 : 0;
                 subresult = subnum1 - subnum2;
                 Console.WriteLine($"The result of {subnum1} - {subnum2}  = {subresult}");
                 break;
@@ -405,12 +405,12 @@ do
                 Console.WriteLine($"The result of {mnum1} * {mnum2}  = {mresult}");
                 break;
             case 4:
-                int dnum1, dnum2, dresult;
+                double dnum1, dnum2, dresult;
                 Console.WriteLine("You have chosen Division");
                 Console.Write("Enter the first number: ");
-                dnum1 = int.TryParse(Console.ReadLine(), out dnum1) ? dnum1 : 0;
+                dnum1 = double.TryParse(Console.ReadLine(), out dnum1) ? dnum1 : 0;
                 Console.Write("Enter the second number: ");
-                dnum2 = int.TryParse(Console.ReadLine(), out dnum2) ? dnum2 : 0;
+                dnum2 = double.TryParse(Console.ReadLine(), out dnum2) ? dnum2 : 0;
                 if(dnum2 ==0 )
                 {
                     Console.WriteLine("Error: Division by zero is not allowed.");
@@ -425,7 +425,7 @@ do
                 break;
             default:
                 Console.WriteLine("Invalid choice. Please select a valid option.");
-                a = false;
+                
                 break;
         }
 
