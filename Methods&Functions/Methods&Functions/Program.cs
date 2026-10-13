@@ -90,25 +90,38 @@
 //    {
 //        return x - y;
 //    }
-//}
+//} 
 
 class Calculator
 {
     static void Main()
     {
+        int a, b;
         Console.WriteLine("Enter First Number: ");
-        int a = Convert.ToInt32(Console.ReadLine());
+        //int a = Convert.ToInt32(Console.ReadLine());
+        if(!int.TryParse(Console.ReadLine(), out  a)){
+             Console.WriteLine("Inavalid first number");
+            return;
+        }
         Console.WriteLine("Enter Second Number: ");
-        int b = Convert.ToInt32(Console.ReadLine());
-
+        // int b = Convert.ToInt32(Console.ReadLine());
+        if (!int.TryParse(Console.ReadLine(), out  b))
+        {
+            Console.WriteLine("Invalid Second Number");
+            return;
+        }
         Console.WriteLine("1. Addition");
         Console.WriteLine("2. Subtraction");
         Console.WriteLine("3. Multiplication");
         Console.WriteLine("4. Division");
         Console.Write("Choose operation: ");
 
-        int choice = Convert.ToInt32(Console.ReadLine());
-
+        //int choice = Convert.ToInt32(Console.ReadLine());
+        if(!int.TryParse(Console.ReadLine(), out int choice))
+        {
+            Console.WriteLine("Invalid Choice");
+            return;
+        }
         switch (choice)
         {
             case 1:
@@ -128,27 +141,57 @@ class Calculator
                 }
             case 4:
                 {
-                    Console.WriteLine(Divide(a, b));
+                    if(b == 0)
+                    {
+                        Console.WriteLine("Division by 0 is not allowed!");
+                    }
+                    else {
+                        Console.WriteLine(Divide(a, b));
+                        
+                    }
+                    break;
+
+                }
+            default:
+                {
+                    Console.WriteLine("Invalid");
                     break;
                 }
         }
     }
-        static int Add(int a, int b)
-        {
-            return a + b;
-        }
-        static int Subtract(int a, int b)
-        {
-            return a - b;
-        }
-
-        static int Multiply(int a, int b)
-        {
-            return a * b;
-        }
-
-        static double Divide(double a, double b)
+    static int Add(int a, int b)
     {
-        return  (double)a / b;
+        return a + b;
+    }
+    static int Subtract(int a, int b)
+    {
+        return a - b;
+    }
+
+    static int Multiply(int a, int b)
+    {
+        return a * b;
+    }
+
+    static double Divide(double a, double b)
+    {
+        return a / b;
     }
 }
+
+
+//class Program
+//{
+//    static void Main()
+//    {
+//        Console.Write("Enter a number: ");
+//        int num= Convert.ToInt32(Console.ReadLine());
+
+//        bool result = Convert.ToBoolean(isEven(num));
+//        Console.WriteLine(result);
+//    }
+//    static bool isEven(int a)
+//    {
+//        return a % 2 == 0 ? true : false;
+//    }
+//}
