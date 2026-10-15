@@ -1,0 +1,112 @@
+OOPS -- Full form of OOPS is Object Oriented Programming System.
+It is a programming paradigm that uses objects and classes to design and develop software applications.
+OOPS focuses on the concepts of encapsulation, inheritance, polymorphism, and abstraction to create modular and reusable code.
+
+
+
+Class -- A class is a blueprint or template for creating objects. It defines the properties (attributes) and behaviors (methods) that 
+         the objects of that class will have. A class can be thought of as a user-defined data type.
+
+
+Object -- An object is an instance of a class. It represents a specific entity that has its own state (values of attributes) and behavior (methods). 
+          Objects are created based on the structure defined by the class, and they can interact with each other through their methods.
+
+Constructors -- A constructor is a special method in a class that is automatically called when an object of that class is created. 
+                It is used to initialize the object's attributes and perform any setup required for the object to function properly. 
+                Constructors have the same name as the class and do not have a return type.
+
+                Example :- 
+
+                class Employee
+                        {
+                           public string Name;
+                           public int Salary;
+                           
+                           public Employee()
+                           {
+                               Name = "Ritik";
+                               Salary = 50000;
+                           }
+                         }
+                  static void Main()
+                         {
+                             Employee employee = new Employee();
+                         
+                             Console.WriteLine(employee.Name);
+                             Console.WriteLine(employee.Salary);
+                         }
+                         Flow of Constructor Execution:
+                         new Employee()
+                         Starting of Object Creation
+                         
+                         Then Employee() constructor called.
+                         Name = "Ritik"
+                         Salary = 50000
+                         
+                         Initialized object
+                         employee.Name ? Ritik
+                         employee.Salary ? 50000
+                         
+                         
+                         Constructor ke 3 important rules:
+                         1. Constructor ka naam class ke naam jaisa hota hai.
+                         2. Constructor ka koi return type nahi hota — void bhi nahi.
+                         3. new Employee() se object banate waqt matching constructor call hota hai.
+
+
+
+1. Why does new Book() give a compile-time error?
+
+class Book
+{
+    public string Title;
+
+    public Book(string title)
+    {
+        Title = title;
+    }
+}
+
+Inside main
+Book book = new Book();
+
+
+Ans- The problem is that our constructor requires one string argument.
+Valid — matching constructor
+Book book = new Book("C# Basics");
+The constructor receives the required string.
+
+
+
+Invalid — no matching constructor
+Book book = new Book();
+No argument is provided, but the constructor requires one.
+
+
+Important C# rule
+- If you declare no constructor, C# normally provides a default parameterless constructor.
+- If you declare your own constructor, such as Book(string title), C# does not automatically add a parameterless constructor for you.
+- If you want both options, declare both constructors.
+
+class Book
+{
+    public string Title;
+
+    public Book()
+    {
+        Title = "Unknown";
+    }
+
+    public Book(string title)
+    {
+        Title = title;
+    }
+}
+Now both are valid:
+Book book1 = new Book();
+Book book2 = new Book("C# Basics");
+
+Console.WriteLine(book1.Title); // Unknown
+Console.WriteLine(book2.Title); // C# Basics
+
+This is called constructor overloading: one class has multiple constructors with different parameter lists.
