@@ -1,0 +1,233 @@
+Encapsulation
+It means hiding the internal state and requiring all interaction to be performed through an object's methods. It is a fundamental 
+concept in object-oriented programming (OOP) that helps to protect the integrity of the data and prevent unintended interference.
+
+In simple words we can define this :- Encapsulation is the process of bundling data and methods into a class and controlling access to that data.
+
+1. Purpose:
+Protect data from uncontrolled access.
+Apply validation before changing data.
+Maintain data integrity.
+
+2. Access Modifiers
+
+public:
+Accessible wherever permitted
+
+private:
+Accessible only inside the declaring type
+
+protected:
+Accessible inside the declaring type and derived types
+
+internal:
+Accessible within the same assembly
+
+
+3. Private Field Example
+
+class BankAccount
+{
+    private double balance = 1000;
+
+    public void Deposit(double amount)
+    {
+        if (amount > 0)
+        {
+            balance += amount;
+        }
+    }
+
+    public double GetBalance()
+    {
+        return balance;
+    }
+}
+
+4. What is return?
+
+return sends a value back to the caller and ends the current method.
+
+public double GetBalance()
+{
+    return balance;
+}
+
+If balance is 1500, GetBalance() returns 1500.
+
+Console.WriteLine(account.GetBalance());
+
+The returned value is passed to Console.WriteLine(), which prints 1500.
+
+Important: Returning a value does not make a private field public. Only its value is returned.
+
+5. Program Execution Flow
+
+static void Main()
+{
+    Console.WriteLine("A");
+    ShowMessage();
+    Console.WriteLine("C");
+}
+
+static void ShowMessage()
+{
+    Console.WriteLine("B");
+}
+
+Output:
+
+A
+B
+C
+
+Execution sequence:
+
+Program starts at Main() in a typical C# executable.
+
+Prints A.
+
+Calls ShowMessage().
+
+Prints B inside that method.
+
+Returns to Main() after the method finishes.
+
+Prints C.
+
+6. Important Rules
+
+Defining a method does not execute it.
+
+A method executes when it is called, subject to the program's execution flow.
+
+private prevents direct access from outside the declaring type.
+
+Code inside the class can still modify its private fields.
+
+Encapsulation works through access control and carefully designed methods or properties.
+
+void means the method does not return a value.
+
+return value; sends a value to the caller and ends the current method.
+
+Interview Answer
+
+Why is encapsulation important?
+
+Encapsulation protects an object's internal state by restricting direct access and providing controlled ways to read or modify data.
+It helps enforce validation and maintain data integrity.
+
+
+
+
+/// Most importent point and doubt is  if we can access private inside the same class then we can change balance so what is the need 
+if balance changed
+
+class BankAccount
+{
+    private double balance = 1000;
+
+    public void ResetBalance()
+    {
+        balance = -5000;
+    }
+}
+BankAccount account = new BankAccount();
+
+account.ResetBalance();
+
+then output will be -5000; even it does not give a compile time error so we are in problem again so what is the benefit of encapsulation.
+Pupose of encapsulatio is not like anyone cannot chnage data inside the class the main use is noone can chnage directly private data 
+outside of that class and that class enforce his own rules on private data.
+
+so we write ResetBalance() Like this
+
+public void ResetBalance()
+{
+    balance = 0;
+}
+
+Or if balance change not allowed  according to business rules so we cannot create this type of method.
+//
+
+
+
+## C# Properties — `get` and `set`
+
+### What is a property?
+
+A property provides controlled access to a class's data. It can contain logic for reading or assigning a value.
+
+### Why use properties instead of methods?
+
+Methods can also provide controlled access. Properties offer a natural, standard C# syntax for reading and assigning data.
+
+**Method syntax:**
+```csharp
+emp.SetSalary(50000);
+double amount = emp.GetSalary();
+```
+
+**Property syntax:**
+```csharp
+emp.Salary = 50000;
+double amount = emp.Salary;
+```
+
+### What is `get`?
+
+`get` runs when a property value is read. It returns a value to the caller.
+
+### What is `set`?
+
+`set` runs when a value is assigned to a property. The special keyword `value` represents the assigned value.
+
+### Execution rules
+
+- `emp.Salary = 50000;` ? `set` runs.
+- `Console.WriteLine(emp.Salary);` ? `get` runs.
+- `return salary;` sends the current value to the caller.
+- `salary = value;` updates the private field.
+- Properties can enforce validation and help maintain data integrity.
+
+### Interview answer
+
+Properties provide controlled access to class data using convenient C# syntax. Their `get` and `set` accessors can implement logic 
+such as validation. Methods can achieve similar control, but properties are the standard pattern for accessing an object's data.
+
+
+** Private set**
+Let company want employee can see the their read the salary but cannot chnage it so we use private set.
+
+class Employee
+{
+    public double Salary { get; private set; }
+    public Employee(double salary)
+    {
+        Salary = salary;
+    }
+}
+
+class Program
+{
+    static void Main()
+    {
+        Employee emp = new Employee(50000);
+        emp.Salary = 8000;
+        Console.WriteLine(emp.Salary);
+    }
+}
+
+Yahan kya ho raha hai?
+- public get —  we can read salary outside from class.
+- private set — We can not change salary outside from class
+- Inside constructor we can set salary because Constructor is alos a member of that class.
+
+
+2. Importent for Interview 
+Property	                   Meaning
+get; set;	               Read aur write dono allowed
+get; private set;	       Public read, class ke andar write
+private get; set;	       Public access se read restricted, setter public ho sakta hai only if property accessibility allows it
+get;                       Read-only property; value initialize karne ke liye constructor ya initializer ka use ho sakta hai
