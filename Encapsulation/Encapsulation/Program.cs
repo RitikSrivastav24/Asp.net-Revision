@@ -89,12 +89,38 @@
 
 using System.Diagnostics.CodeAnalysis;
 
+//class Employee
+//{
+//    public double Salary { get; private set; }
+//    public Employee(double salary)
+//    {
+//        Salary = salary;
+//    }
+//}
+
+//class Program
+//{
+//    static void Main()
+//    {
+//        Employee emp = new Employee(50000);
+//        emp.Salary = 8000;
+//        Console.WriteLine(emp.Salary);
+//    }
+//}
+
+
 class Employee
 {
-    public double Salary { get; private set; }
-    public Employee(double salary)
+    public double empsalary { get; }
+    public double employeeId { get; }
+
+    public Employee(double salary, double employeeId)
     {
-        Salary = salary;
+        empsalary = salary;
+        this.employeeId = employeeId;
+
+        //return empsalary;
+
     }
 }
 
@@ -102,8 +128,9 @@ class Program
 {
     static void Main()
     {
-        Employee emp = new Employee(50000);
-        emp.Salary = 8000;
-        Console.WriteLine(emp.Salary);
+        Employee employee = new Employee(5000, 3316);
+        Console.WriteLine(employee.empsalary);
+        Console.WriteLine(employee.employeeId);
+        
     }
 }

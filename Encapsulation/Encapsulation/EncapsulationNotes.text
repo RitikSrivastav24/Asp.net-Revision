@@ -222,7 +222,7 @@ class Program
 Yahan kya ho raha hai?
 - public get —  we can read salary outside from class.
 - private set — We can not change salary outside from class
-- Inside constructor we can set salary because Constructor is alos a member of that class.
+- Inside constructor we can set salary because Constructor is also a member of that class.
 
 
 2. Importent for Interview 

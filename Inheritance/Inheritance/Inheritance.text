@@ -1,0 +1,130 @@
+** Inheritance **
+
+Inheritance is an OOP concept in which a derived class inheris accessible members (methods & properties) from its base class. It allows code 
+reuseability.
+It cannot directly access private members.
+
+class Employee
+{
+    public string Name { get; set; } = "";
+
+    public void Work()
+    {
+        Console.WriteLine("Employee is working");
+    }
+
+    private double salary = 50000;
+}
+
+class Developer : Employee
+{
+    public void WriteCode()
+    {
+        Console.WriteLine("Developer is coding");
+    }
+}
+
+Interview-ready definition
+Inheritance is an OOP principle in which a derived class inherits accessible members of a base class, 
+promoting code reusability and establishing an “is-a” relationship.
+
+
+** What is "is-a" & "has-a" relationship?
+
+Ans - is-a
+A class is a type of category; it is usually represented through inheritance.
+Examples:
+
+Dog is an Animal.
+Developer is an Employee.
+class Developer : Employee
+{
+}
+
+    has-a
+An object contains a reference or a member of another object.
+Example: Car has an Engine.
+
+class Engine
+{
+}
+
+class Car
+{
+    public Engine MyEngine = new Engine();
+}
+
+
+
+*** When an object is created, its instance fields and the backing fields for auto-properties are assigned 
+default values, unless an initial value has been specified.
+
+Type                   Default value
+
+int                       0
+
+double                    0
+
+float                     0
+
+bool                    false
+
+char                     '\0'
+
+string                   null
+
+Reference type           null
+
+
+example : 
+class Employee
+{
+    public string Name { get; set; }
+    public double Salary { get; set; } 
+    public void Work()
+    {
+        Console.WriteLine("Employee is Working");
+    }
+}
+
+class Developer : Employee
+{
+    public void showDetails()
+    {
+       
+        Console.WriteLine(Name);
+        Console.WriteLine(Salary);
+    }
+    public void Code()
+    {
+        Console.WriteLine("Developer is coding");
+    }
+}
+
+class program
+{
+    static void Main()
+    {
+        Developer dev = new Developer();
+        dev.Name = "Ritik";
+        //dev.Salary = 50000;
+        Console.WriteLine(dev.Name);
+        dev.Work();
+        dev.Code();
+        dev.showDetails();
+    }
+}
+if we comment salary then c# assinged the daefult value 0;
+
+
+*** Null vs Empty String
+
+null: String reference kisi string object ko refer nahi kar raha.
+
+"": Valid string hai, lekin uski length zero hai.
+
+string name = null;
+string emptyName = "";
+
+Console.WriteLine(name == null);      // True
+Console.WriteLine(emptyName.Length);  // 0
