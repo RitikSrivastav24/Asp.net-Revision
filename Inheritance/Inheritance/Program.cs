@@ -102,6 +102,8 @@ The parent constructor executes before the child constructor's body.
 */
 
 
+using System.Xml.Linq;
+
 class Employee
 {
     public Employee(string name)
@@ -196,3 +198,116 @@ class Program
 }
 Here, base(name) passes the constructor argument to Employee, where it is assigned to the inherited Name field.
 */
+
+
+/* ** base() vs base.mathodname
+ * 
+ * class Employee3
+{
+    public string Name;
+    public Employee3(string name)
+    {
+        Name = name;
+        Console.WriteLine($"Employee {name}");
+    }
+
+    public virtual void Work()
+    {
+        Console.WriteLine("Employee is working");
+    }
+}
+
+class Developer3 : Employee3
+{
+    public Developer3(string name): base(name)
+    {
+        Console.WriteLine("Developer Created");
+    }
+
+    public override void Work()
+    {
+        base.Work();
+        Console.WriteLine("Developer is coding");
+    }
+}
+
+class Program
+{
+    static void Main()
+    {
+        Developer3 dev3 = new Developer3("Ritik");
+        dev3.Work();
+    }
+} */
+
+
+// Sealed 
+//class Employee4
+//{
+//    public virtual void Work()
+//    {
+//        Console.WriteLine("Employee");
+//    }
+//}
+//class Developer4 : Employee4
+//{
+//    public sealed override void Work()
+//    {
+//        Console.WriteLine("Developer is created");
+//    }
+//}
+
+//class SeniorDeveloper : Developer4
+//{
+//    public override void Work()  // It will give comnpile time error because work is sealed in developer. but if we remove work just inherit developer class without work method then it will not give error because only work is sealed. We can also whole class. 
+//    {
+
+//    }
+//}
+
+
+//Create an Employee class with a protected field Name.
+//Add a constructor that accepts a name and assigns it to Name.
+//Add a virtual method Work() that prints Employee is working.
+//Create a Developer class that inherits from Employee.
+//Call the parent constructor using base(name).
+//Override Work() to print Developer is coding, then call base.Work().
+//In Main(), create an Employee reference pointing to a Developer object.
+//Call Work() through that reference.
+
+class Employee5
+{
+    protected string Name;
+    public Employee5(string name)
+    {
+        Name = name;
+    }
+
+    public virtual void Work()
+    {
+        Console.WriteLine("Employee is working");
+    }
+}
+
+class Developer5 : Employee5
+{
+    public Developer5(string name) : base(name)
+    {
+        Console.WriteLine("Developer Created");
+    }
+
+    public override void Work()
+    {
+        Console.WriteLine("Developer is Coding");
+        base.Work();
+    }
+}
+
+class Program
+{
+    static void Main()
+    {
+        Employee5 emp5 = new Developer5("Ritik");
+        emp5.Work();
+    }
+}

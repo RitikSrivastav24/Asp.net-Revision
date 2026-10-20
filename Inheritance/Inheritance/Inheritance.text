@@ -128,3 +128,120 @@ string emptyName = "";
 
 Console.WriteLine(name == null);      // True
 Console.WriteLine(emptyName.Length);  // 0
+
+
+** base() vs base.mathodname
+base() - calls the parent construtor
+base.methodname- calls the method implementation from parent class.
+
+Example :- 
+
+class Employee3
+{
+    public string Name;
+    public Employee3(string name)
+    {
+        Name = name;
+        Console.WriteLine($"Employee {name}");
+    }
+
+    public virtual void Work()
+    {
+        Console.WriteLine("Employee is working");
+    }
+}
+
+class Developer3 : Employee3
+{
+    public Developer3(string name): base(name)
+    {
+        Console.WriteLine("Developer Created");
+    }
+
+    public override void Work()
+    {
+        base.Work();
+        Console.WriteLine("Developer is coding");
+    }
+}
+
+class Program
+{
+    static void Main()
+    {
+        Developer3 dev3 = new Developer3("Ritik");
+        dev3.Work();
+    }
+}
+
+
+Understand the execution flow
+1. Object creation
+new Developer3("Ritik")
+The Developer3 constructor starts, passing "Ritik" to the parent constructor.
+
+2.Parent constructor
+base(name)
+Employee3 assigns Name = name and prints Employee Ritik.
+
+3.Child constructor continues
+Developer3 prints Developer Created.
+
+4.Method overriding
+dev3.Work()
+The overridden Developer3 method executes. base.Work() prints the parent's message, followed by the developer's message.
+
+
+
+*** Sealed
+C# allows us to prevent further inheritance or prevent a method from being overridden again.
+Example :- class Employee
+{
+    public virtual void Work()
+    {
+        Console.WriteLine("Employee working");
+    }
+}
+
+class Developer : Employee
+{
+    public sealed override void Work()
+    {
+        Console.WriteLine("Developer coding");
+    }
+}
+Here, sealed override means that Developer overrides Work(), but a further derived class cannot override
+that method again.
+
+class SeniorDeveloper : Developer
+{
+    // Cannot override Work() here because it is sealed.
+}
+SeniorDeveloper can still inherit from Developer; it simply cannot override the sealed Work() method.
+
+We can also declare an entire class as sealed:
+sealed class FinalReport
+{
+}
+
+Example :- 
+class Employee
+{
+    public virtual void Work()
+    {
+        Console.WriteLine("Employee working");
+    }
+}
+
+class Developer : Employee
+{
+    public sealed override void Work()
+    {
+        Console.WriteLine("Developer coding");
+    }
+}
+
+class SeniorDeveloper : Developer
+{
+}
+Ans- Yes, because SeniorDeveloper inherits from Developer without overriding Work().
