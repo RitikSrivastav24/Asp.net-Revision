@@ -1,0 +1,153 @@
+** Abstraction
+Abstraction is the process of hiding the implementation details from the user only functionality will be provided to 
+the user.
+In other words we can say that, the user will have only what the object the does insteac of how it does.
+
+
+// Abstraction
+class Employee
+{
+    public int EmpId;
+    public string Name;
+    public double Grossay;
+    double Tax = 0.1;
+    double NetSalary;
+
+    public Employee(int Eid, string Ename, double EGrossay)
+    {
+        EmpId = Eid;
+        Name = Ename;
+        Grossay = EGrossay;
+    }
+
+    void CalculateSalary()
+    {
+        if(Grossay > 35000)
+        {
+            NetSalary = Grossay - (Tax * Grossay);
+            Console.WriteLine($"Your Salary is {NetSalary}");
+        }
+        else
+        {
+            Console.WriteLine($"Your Salary is {Grossay}");
+        }
+    }
+
+    public void ShowEmployeeDetails()
+    {
+        Console.WriteLine($"Employee Name is {Name}");
+        CalculateSalary();   
+    }
+}
+
+class Program
+{
+    static void Main()
+    {
+        Employee emp = new Employee(3316,"Ritik Srivatsav", 40000);
+        emp.ShowEmployeeDetails();
+        Console.ReadLine();
+    }
+}
+If an interviewer asks, “Can abstraction be achieved without an abstract class or interface?”, 
+you can answer:
+Yes. Abstraction is a design principle, not just a C# keyword. It can be achieved by exposing only the 
+necessary public operations and hiding internal implementation details using encapsulation and appropriate
+access modifiers. Abstract classes and interfaces are additional language mechanisms that help define 
+abstractions, especially when multiple implementations are needed.
+
+
+
+*******************************************************************************************************************8
+In C#, we commonly implement abstraction using:
+1. Abstract classes
+2. Interfaces
+
+1. Abstract Class--
+An abstract class is a class declared with the abstract keyword.
+abstract class Animal
+{
+    public abstract void MakeSound();
+}
+Let's understand each part.
+- abstract class Animal — defines a base class that cannot be instantiated directly.
+- public abstract void MakeSound(); — declares a method without providing its implementation.
+- The derived class must implement this abstract method unless that derived class is also abstract.
+
+For example, this is invalid:
+Animal animal = new Animal(); // Compile-time error
+Why? Because Animal is abstract. We must create an object of a concrete derived class instead.
+
+
+abstract class Animal
+{
+    public abstract void MakeSound();
+}
+
+class Dog : Animal
+{
+    public override void MakeSound()
+    {
+        Console.WriteLine("Dog barks");
+    }
+}
+
+class Program
+{
+    static void Main()
+    {
+        Dog dog = new Dog();
+        dog.MakeSound();
+    }
+}
+Remember the difference:
+- abstract says the implementation is incomplete or intentionally deferred.
+- override provides or replaces the inherited virtual/abstract method implementation.
+- new creates an object of a non-abstract class.
+
+
+
+************************************************************************************************************************
+
+Abstract vs Virtual Methods
+Both are related to inheritance and polymorphism, but they serve different purposes.
+abstract class Employee
+{
+    public abstract void Work();
+}
+
+class Developer : Employee
+{
+    public override void Work()
+    {
+        Console.WriteLine("Writing code");
+    }
+}
+Here, Employee declares what Work() must do, but doesn't provide its implementation. A concrete derived
+class must implement it.
+Example 2 — Virtual method
+class Employee
+{
+    public virtual void Work()
+    {
+        Console.WriteLine("Employee is working");
+    }
+}
+
+class Developer : Employee
+{
+    public override void Work()
+    {
+        Console.WriteLine("Writing code");
+    }
+}
+Here, Employee already provides a default implementation. Developer can override it, but it isn't required to.
+Remember this comparison
+Feature	                                     Abstract method	                             Virtual method
+Has implementation in base class?	               No	                                          Yes
+Can be overridden?	                  Must be implemented by a concrete derived class	     Can be overridden
+Declared using	                                 abstract	                                     virtual
+Can appear in a non-abstract class?             	No	                                          Yes   
+
+
+An abstract class can contain both abstract and virtual methods, as well as ordinary implemented methods.

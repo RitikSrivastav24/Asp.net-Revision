@@ -1,0 +1,178 @@
+****** Interface *****
+Interface is contract that a class agrees to follow. or we can say that An interface is a set of rules that a class promises to follow.
+
+interface IPhoneCharger
+{
+    void TypeC();
+}
+
+class Samsung : IPhoneCharger
+{
+    public void TypeC()
+    {
+        Console.WriteLine("This is samsung charger Type-c");
+    }
+}
+
+class Oneplus : IPhoneCharger
+{
+    public void TypeC()
+    {
+        Console.WriteLine("This is the onelus charger Type-c");
+    }
+}
+
+class Program
+{
+    static void Main()
+    {
+        IPhoneCharger charger1 = new Oneplus();
+        IPhoneCharger charger2 = new Samsung();
+        charger1.TypeC();
+        charger2.TypeC();
+    }
+}
+Notice three things:
+1. interface IPhoneCharger declares the contract.
+2. class Samsung : IPhoneCharger means Samsung implements that interface.
+3. Both classes provide their own public implementation of Work().
+
+In C#, interface names conventionally begin with I, such as IPhoneCharger, ILogger, or IPayable.
+
+Real-world .NET connection: interfaces are commonly used for dependency injection, database access abstractions, logging, payment services, and unit testing.
+
+
+**********  Interface vs. abstract class
+Feature	                                     Interface	                                 Abstract class
+Main purpose	                          Define a contract	                     Define a base type and shared behavior
+Can a class implement/inherit multiple? Multiple interfaces	                         Only one base class
+Can contain implemented methods?	   Yes, through supported default implementations	     Yes
+Can have instance fields and constructors?	No instance fields or instance constructors	     Yes
+Typical example	                             IPhoneCharger	                               Samsung
+
+
+
+
+******** Interface vs Abstract Class ***********
+
+Imagine we're building your university's IT Helpdesk System.
+- Developers and IT support employees share basic employee information.
+- Different notification services might send messages by email or SMS.
+- We want common employee behavior, but we also want to swap notification providers easily.
+
+abstract class Employee
+{
+    public int EmpId { get; }
+    public string EmpName { get; }
+
+    protected Employee(int id, string name)
+    {
+        EmpId = id;
+        EmpName = name;
+    }
+
+    public void ShowDetails()
+    {
+        Console.WriteLine($"{EmpId} {EmpName}");
+    }
+    public abstract void PerformDuties();
+}
+
+class Developer : Employee
+{
+    public Developer(int  id , string name) : base(id, name)
+    {
+
+    }
+    public override void PerformDuties()
+    {
+        Console.WriteLine("Developing software");
+    }
+}
+
+class program
+{
+    static void Main()
+    {
+        Employee employee = new Developer(3316, "Ritik");
+        employee.ShowDetails();
+        employee.PerformDuties();
+
+    }
+}
+
+Why use an abstract class here?
+- EmpId and Name are shared state.
+- The constructor initializes that state.
+- ShowDetails() is shared implementation.
+- PerformDuties() must be implemented by each concrete employee type.
+An abstract class lets us combine shared data, shared behavior, and required behavior in one base type.
+
+
+
+******** Now imagine the Helpdesk System can send notifications through different providers. We don't want our application to depend directly on one email or SMS implementation. 
+interface INotificationService
+{
+    void Send(string message);
+}
+class EmailNotification : INotificationService
+{
+    public void Send(string message)
+    {
+        Console.WriteLine($"Email: {message}");
+    }
+}
+
+class SmsNotification : INotificationService
+{
+    public void Send(string message)
+    {
+        Console.WriteLine($"SMS: {message}");
+    }
+}
+
+class HelpdeskService
+{
+    private readonly INotificationService _notification;
+
+    public HelpdeskService(INotificationService notification)
+    {
+        _notification = notification;
+    }
+
+    public void ResolveTicket()
+    {
+        Console.WriteLine("Ticket resolved.");
+        _notification.Send("Your IT ticket has been resolved.");
+    }
+}
+
+var emailHelpdesk =
+    new HelpdeskService(new EmailNotification());
+
+emailHelpdesk.ResolveTicket();
+
+var smsHelpdesk =
+    new HelpdeskService(new SmsNotification());
+
+smsHelpdesk.ResolveTicket();
+
+smsHelpdesk.ResolveTicket();
+
+
+The same HelpdeskService works with either notification provider.
+HelpdeskService
+
+Depends on INotificationService
+
+
+EmailNotification
+
+SmsNotification
+
+
+The implementation can be changed without rewriting the helpdesk workflow.
+
+This is an introduction to dependency injection: a dependency is supplied from outside rather than created inside the class. In a real ASP.NET Core application, the built-in DI container can supply the chosen implementation.
+
+One important distinction: an interface doesn't automatically create dependency injection. It makes the dependency easy to abstract; DI is the technique used to provide it.
