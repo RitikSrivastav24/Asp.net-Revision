@@ -1,0 +1,27 @@
+***** Composition ******
+Inheritance represent "is-a" relationship. Composition commonly represents a "has-a" relationship.
+
+Example :
+In Inheritance: A developer is a Employee
+class Employee { }
+class Developer : Employee { }
+
+In Composition : A Computer has a Processor.
+class Processor
+{
+    public void Start()
+    {
+        Console.WriteLine("Processor started");
+    }
+}
+
+class Computer
+{
+    private readonly Processor _processor = new Processor();
+
+    public void Start()
+    {
+        _processor.Start();
+        Console.WriteLine("Computer started");
+    }
+}
