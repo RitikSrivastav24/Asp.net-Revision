@@ -19,16 +19,16 @@ class Oneplus : IPhoneCharger
     }
 }
 
-class Program
-{
-    static void Main()
-    {
-        IPhoneCharger charger1 = new Oneplus();
-        IPhoneCharger charger2 = new Samsung();
-        charger1.TypeC();
-        charger2.TypeC();
-    }
-}
+//class Program
+//{
+//    static void Main()
+//    {
+//        IPhoneCharger charger1 = new Oneplus();
+//        IPhoneCharger charger2 = new Samsung();
+//        charger1.TypeC();
+//        charger2.TypeC();
+//    }
+//}
 
 
 /* When to use abstract class : use abstract class for shared base behaviour.   
@@ -79,3 +79,90 @@ Why use an abstract class here?
 - ShowDetails() is shared implementation.
 - PerformDuties() must be implemented by each concrete employee type.
 An abstract class lets us combine shared data, shared behavior, and required behavior in one base type. */
+
+
+/* Multiple Interfaces 
+interface IWorkable
+{
+    void work();
+}
+
+interface IReportable
+{
+    void report();
+}
+interface IActivities
+{
+    void activities();
+}
+class Developer: IWorkable , IReportable, IActivities
+{
+    public void work()
+    {
+        Console.WriteLine("Developer is working");
+    }
+    public void report()
+    {
+        Console.WriteLine("Developer is reporting");
+    }
+    public void activities()
+    {
+        Console.WriteLine("Developer Activities");
+    }
+}
+
+class Program
+{
+    static void Main()
+    {
+        Developer dev= new Developer();
+        dev.work();
+        dev.report();
+        dev.activities();
+    }
+}
+
+*/
+
+/* Explicit Interface Implementation
+interface IDeveloper
+{
+    void ShowRole();
+}
+
+interface IManager
+{
+    void ShowRole();
+}
+
+class Employee : IDeveloper, IManager
+{
+    void IDeveloper.ShowRole()
+    {
+        Console.WriteLine("Developer");
+    }
+
+    void IManager.ShowRole()
+    {
+        Console.WriteLine("Manager");
+    }
+}
+
+class Program
+{
+    static void Main()
+    {
+        Employee emp = new Employee();
+        ((IDeveloper)emp).ShowRole();
+        ((IManager)emp).ShowRole();
+    }
+}
+Why can't we call emp.ShowRole() directly? Because explicitly implemented interface members aren't exposed as ordinary public members of the class. We access each implementation through its interface.
+Interview tip
+Explicit interface implementation is useful when:
+-Two interfaces have members with the same name.
+- You want a member available only through its interface.
+-You want to avoid exposing every interface member as part of the class's normal public API.
+
+    */
+

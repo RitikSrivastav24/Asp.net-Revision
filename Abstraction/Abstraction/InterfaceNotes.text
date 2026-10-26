@@ -172,7 +172,100 @@ SmsNotification
 
 
 The implementation can be changed without rewriting the helpdesk workflow.
-
-This is an introduction to dependency injection: a dependency is supplied from outside rather than created inside the class. In a real ASP.NET Core application, the built-in DI container can supply the chosen implementation.
-
+This is an introduction to dependency injection: a dependency is supplied from outside rather than created inside the class.In a real ASP.NET Core application, the built-in DI container can supply the chosen implementation.
 One important distinction: an interface doesn't automatically create dependency injection. It makes the dependency easy to abstract; DI is the technique used to provide it.
+
+
+
+******** Multiple Interfaces and explicit implementation ************
+
+Let developer might need to:
+1.Perform work
+2.Generate Work
+3. Log Activities
+Example :- 
+             
+             interface IWorkable
+             {
+                 void work();
+             }
+             
+             interface IReportable
+             {
+                 void report();
+             }
+             interface IActivities
+             {
+                 void activities();
+             }
+             class Developer: IWorkable , IReportable, IActivities
+             {
+                 public void work()
+                 {
+                     Console.WriteLine("Developer is working");
+                 }
+                 public void report()
+                 {
+                     Console.WriteLine("Developer is reporting");
+                 }
+                 public void activities()
+                 {
+                     Console.WriteLine("Developer Activities");
+                 }
+             }
+             
+             class Program
+             {
+                 static void Main()
+                 {
+                     Developer dev= new Developer();
+                     dev.work();
+                     dev.report();
+                     dev.activities();
+                 }
+             }
+
+
+** Explicit Interface Implementation
+Suppose two interfaces contain methods with the same name, but those methods have different meanings.
+
+               interface IDeveloper
+               {
+                   void ShowRole();
+               }
+               
+               interface IManager
+               {
+                   void ShowRole();
+               }
+               
+               class Employee : IDeveloper, IManager
+               {
+                   void IDeveloper.ShowRole()
+                   {
+                       Console.WriteLine("Developer");
+                   }
+               
+                   void IManager.ShowRole()
+                   {
+                       Console.WriteLine("Manager");
+                   }
+               }
+               
+               class Program
+               {
+                   static void Main()
+                   {
+                       Employee emp = new Employee();
+                       ((IDeveloper)emp).ShowRole();
+                       ((IManager)emp).ShowRole();
+                   }
+               }
+Why can't we call emp.ShowRole() directly? Because explicitly implemented interface members aren't exposed as ordinary public members of the class. We access each implementation through its interface.
+Interview tip
+Explicit interface implementation is useful when:
+- Two interfaces have members with the same name.
+- You want a member available only through its interface.
+- You want to avoid exposing every interface member as part of the class's normal public API.
+
+One correction worth remembering: a class can implement the same method for multiple interfaces with one public method if their signatures match. Explicit implementation is an option when you need separate behavior, not a requirement for every interface.
