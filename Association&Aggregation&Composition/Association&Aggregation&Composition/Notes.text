@@ -1,0 +1,70 @@
+The main deifferece is how objects are connected and whether one object owns another.
+
+1. Association: Knows or works with or Two objects interact each other.
+              Example :- Imagine a Teacher teaches a Student.
+              * A teacher exists independetly.
+              * A student also exist independtly.
+              * They interact with each other, but neither owns the other.
+
+             class Student
+             {
+                 public string Name = "Ritik";
+             }
+             
+             class Teacher
+             {
+                 public void Teach(Student student)
+                 {
+                     Console.WriteLine($"{student.Name} is Learning");
+                 }
+             }
+             
+             class Program
+             {
+                 static void Main()
+                 {
+                     Student s1= new Student();
+                     Teacher t1= new Teacher();
+                     t1.Teach(s1);
+                 }
+             }
+*************************************************************************************************************************************************            ****************************************************************************************************************************
+2. Aggregation:"has-a" but dosen't own exclusively.
+              Example:- Imagine an IT Department has several Teachers or employees.
+              * A department has teachers
+              * A teacher can exist without Department
+              * If department removed then teachers can work somewhere else.
+              Example:
+              class Teacher
+              {
+              public string Name;
+              public Teacher(string name)
+              {
+                  Name = name;
+              }
+              }
+              
+              class Department
+              {
+                  public Teacher Teacher;
+                  public Department(Teacher teacher)
+                  {
+                      Teacher = teacher;
+                  }
+              }
+              
+              class Program
+              {
+                  static void Main()
+                  {
+                      Teacher teach = new Teacher("Alok");
+                      Department d1 = new Department(teach);
+                      Console.WriteLine($"{teach.Name}");
+                     
+                  }
+              }
+              Here, we created the Teacher separately and then passed the existing object into the Department.
+
+              Remember: Aggregation means a whole has a part, but that part can exist independently.
+              
+              Real-life examples: Department–Teacher, Team–Player.
