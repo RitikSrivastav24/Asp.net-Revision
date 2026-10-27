@@ -25,3 +25,10 @@ class Computer
         Console.WriteLine("Computer started");
     }
 }
+
+
+
+
+
+**********************************************************************************************************************************
+composition expresses a part-of relationship, implemented as a strong form of has-a.
